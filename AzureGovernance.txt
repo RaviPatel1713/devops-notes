@@ -1,0 +1,62 @@
+Azure Governance
+- Azure Blueprints
+    + Azure Blueprints help standardize cloud subscription ro environments deployment
+    + it can define repeatable settings and policies that are appleid as new subscritions are created
+    + Blueprints deploy a new environment based on all of the requirements, settings, and configuraitons
+      of the associated artifacts. Artifacts can include things like:
+        - Role assignments
+        - Policy assignments
+        - Resource groups
+        - Azure resource manager templates
+        - the relationships between resource defintions and assignments (what is deployed) is preserved, which is very useful for backtracking to older versions for lagacy deployment and error correction.     
+
+- Azure Policy
+    + Enables you to create, assing, and manage policies that control or audit your resources. 
+    + Helps define individual policies and groups of related policies, that are known as initiatives, which helps keep the resources polcy compliant with regulatory and corporate standards. 
+    
+- Azure resource locks
+    + Prevents resources from being accidentally deleted or changed. 
+    + There are two types of resource locks: 
+        - Delete: authorized users can still read and modify a resosurce, but they cannot delete the resource
+        - ReadOnly: authorized users can read, but they cannot delete or update the resource. Applying lock is similar to restricting all authorized users to the permissions granted by the Reader role
+
+- Azure Service trust portal 
+    + portal that provides access to various content tools, and othe resource about microsoft security privacy and compliance practices. 
+
+
+
+Azure Arc
+- Manage your entire environment together by projecting your existing non-Azure resources into ARM.
+- Manage multi-cloud and hybrid virtual machines, Kubernetes clusters, and databases as if they are running in Azure.
+- Use familiar Azure services and management capabilities, regardless of where they live.
+- Continue using traditional ITOps while introducing DevOps practices to support new cloud and native patterns in your environment.
+- Configure custom locations as an abstraction layer on top of Azure Arc-enabled Kubernetes clusters and cluster extensions.
+
+- What can Azure Arc do outside of Azure?
+    + Currently, Azure Arc allows you to manage the following resource types hosted outside of Azure:
+        Servers
+        Kubernetes clusters
+        Azure data services
+        SQL Server
+        Virtual machines (preview)
+
+
+- Resource organization
+    + Resource Group: for grouping related resources 
+    + Resouce Tags: for demystyfing resources, giving context to the created resources
+        - They store metadata that is useful for:
+            + Resource management 
+            + cost management and optimization
+            + security 
+            + Governance and regulatory compliance
+            + workload optimizaiton and automation
+            
+    + Rosource Locks: help to avoid accidental changes and delections. 
+
+- Azure Advisor evaluates your Azure resources and make recommendations to help improve in the following areas:
+    + reliability
+    + security 
+    + performance
+    + operational excellence 
+    + Cost 
+

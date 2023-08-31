@@ -1,0 +1,10 @@
+Introduction to DevOps
+
+- What is Azure DevOps? 
+    + A suite of services that provide end-to-end tool chain
+        - Azure Boards: for project tracking (big and small project)
+        - Azure Repos: providing source control sytem functionality (centralized or distributed VCSs)
+        - Azure Pipeline: Creating build and release Pipelines efficiently and quickly
+        - Azure Test: creating manual test plans 
+        - Azure Artifacts: Storing for porject content
+

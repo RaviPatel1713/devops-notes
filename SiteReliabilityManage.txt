@@ -1,0 +1,81 @@
+Manage Site Reliability 
+ - Site Reliability vs DevOps 
+    + While both Site Reliability are DevOps are methodoolgies for 
+      integrating and maintaining smooth and seamless bridge between 
+      development and operations, there are some differences between 
+      the two that essential to uncovered. 
+        - As a member of DevOps team, an individual is responsible for 
+        building deployment systems compliant with the CI/CD ritual
+        as well as building feedback systems that can identify problems 
+        and alert the developers who then solve the issues. 
+        - While working teammember under Site Reliability, looks for issues
+        with the site reliability on a daily basis and is probably the 
+        person who solves those problems too. 
+
+- Application Insights is a very useful tool un Azure that analyzes the 
+  performance of your web application and acna warn you about potential 
+  problems. 
+    + Application Insights send a notification whne it detects that the 
+    performance of your application has degraded in one of these ways:
+        - Repsonse time degradation 
+        - Dependency duration degradation
+        - Slow performance pattern 
+    
+    + Also, Smart Detection is a feature in Application Insights newToyLaunchStorage
+      warns you of potential performance problems and failure anamolies 
+      in the web app. It requires at least eight days at a sufficient 
+      volume to establish a baseline. 
+
+    + How can I improve performance?
+        - here are the three steps to improve performance:
+            + Triage
+                - When looking at the issue, the first thing to ask is: does it matter? 
+            + Diagnose
+                - Ask the following questions:
+                    + Where is the problem?
+                    + Is the server slow to respond?
+                    + Is the page long?
+                    + Does the browser have to do much work to display this page?
+
+                    + if investigating browser reponse times, open Browsers metric
+                    + if Send Request Time is high, look at the performance metrics
+                    + if Receiving Response is predominent, set up an availability test
+                    + if High Client Processing sugggests scripts are running slow, consider 
+                      adding some timing code and send the times in trackMetric calls
+            + Improve
+                - Imrpove Slow pages 
+                    + slow loading of because of large files 
+                    + slow server dependencies 
+                    + capacity issues 
+                - Server reponse time degradation
+                    + compare the degraded response time to the normal response time 
+                    + how many users are affected 
+                    + average time and 90th percentile repsonse time and its seven days prior match 
+                    + correlation between degradation of this operation and degradations in related
+                      dependencies
+                    + Other important resources to diagnose the problem include: 
+                        - profiler traces 
+                        - performance reports in Metric Explorer
+                        - Failure reports
+                    
+    + Perform ongoing tuning to reduce meaningless alerts 
+        - Monitoring for the users: 
+            + Monitoring for the users also called symptom-based monitoring 
+            + In general users care about:
+                - Basic availiblity and correctness
+                - Latency
+                - Uptime
+                - features
+        - Caused-based alerts have their place 
+            + Sometimes there are no symptoms and still you need to be alerted of situation. 
+                (e.g. running low on memory which you wanted to be notified of before it becomes 
+                 a symptom)
+                
+        - Tickets, reports, and emails 
+            + Bug or ticket-tracking systems can be used for this type of alert 
+            + A daily (or a more frequent) report can be useful for alerts that are 
+              long-lived 
+            + Every alert should be tracked through a workflow system for further analysis on 
+              long term basis (for example querterly, monthly, yearly) for clarity and measures for improvisation 
+
+        

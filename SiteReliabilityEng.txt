@@ -1,0 +1,181 @@
+Site Reliability Engineering (SRE)
+- What is Site Reliability Engineering (SRE)?
+    + SRE is an engineering discipline that focusess on reliability. 
+      DevOps is the culture movement that emerged from the urge to 
+      break down the silos typically associate wiht seperate 
+      Developement and Operations organizations. 
+
+- The practices that are often considered core to the practice of SRE "Virtuous Cycles"
+    + "Virtuous Cycles" build feedback loops in an organization continously get better. 
+    + There are two practices in Virtuous Cycle: 
+        - #1 SLIs and SLOs 
+            + Service Level Indicator
+                - Success vs. failure measures
+                - Measure of timing
+                - Measures of throughput 
+            + Service Level Objective 
+                - the expection created in collaboration with the service's developer
+                - something that can be accurately measured and represented inyour monitoring System
+                - "either service is meeting its SLO or it isn't" --> the data should be clear
+                - Error Budget
+                    + Error budget is the difference between the service's perfect reliability and its 
+                      desired reliability. 
+                    + construction error budgetting systems for things like extected or tolerable time percentage 
+                      of downtime within a time frame 
+        - #2 Blameless postmortems 
+            + a post-mordem process which focuses on the failure of the process or the technology during the incident, and not the actions of specific people
+
+- Key SRE principles and practices: The human side of SRE
+    + Toil, in an SRE context reders to operations work being done by a human that has certain characteristics.
+    + Toil has no long term redeeming value becuase it doesnt move the service foward in any meaningful way.
+    + There are situation where toil elimination is of lower priority than other work but on the whole, stripping toil from a service is a key focus for SRE. 
+    + Completing these actions doesnt make the service better in any long-term, persistent way. Its also liek these actions must be repeaded over and over. Even if you keep requests of this nature in some sort of ticket system as many places do, performing the action and resolving a ticket is still toil . Its just a well-tracked toil.
+    + Project work vs. reactive "ops" work 
+        - To do work neccessary to remove toil or improve the reliability of the system, an SRE's time must be
+          allocated appropriately. The figure usaully cited (coming from the original Google model which laid out the foundation for SRE) is 
+          one of no more than 50% operational load on a team. 
+    
+________________________________________________________________________________________________________________________________
+Reading and watching
+For more detailed information about SRE, the best source is a trio of books that have been published on the subject
+
+- Site Reliability Engineering: How Google Runs Production Systems (known as "The SRE Book")
+- The Site Reliability Workbook: Practical Ways to Implement SRE (known as "The SRE Workbook")
+- Seeking SRE: Conversations About Running Production Systems at Scale
+________________________________________________________________________________________________________________________________
+
+- First steps at Work 
+    + It is important to remember the SRE is not "all or nothing". It is meticulous and rigorous process of analysis, development 
+      and maintainence. 
+        - The first step towards reliability in your systems is functional and trustworthy monitoring in your environment. You cannot 
+          tell if something is reliable (or is getting worse or better) if you cannot measrure it. 
+        - Once you have monitoring platforms, the next step is to pick a service at work. Then begin to have SLI an SLO conversations 
+          about it. 
+        - Based on service reliability analysis with SLIs and SLOs and monitoring platforms take approciate, steps to resolve, 
+          develop and automate the processes. 
+        - There is much more detail than the ones mentioned above...
+
+
+Improve Incident response with alerting on Azure 
+- Microsoft Azure provides a robust alerting and monitoring solution called Azure Monitor. It can be used to configure notificaitions
+  and for your key systems and applications. 
+
+- Data types in Azure Monitor 
+    + Azure Monitor receives data from target resources like applications, operating systems, Azure resouces, Azure subscriptions, and 
+      Azure tenants. The nature of the resouce defined which data type are available: A data type can be metric, a log or both a metric 
+      and a log. 
+        - the focus for metric-based data types is the numerical time-sensitive values that represent some aspect of the target resource. 
+        - the focus for log-based data types is the querying of content data held in structured, record-based log files that are relevant to
+          the target resources.
+        
+    + Composition of an alert rule 
+        - Every alert or notification available in Azure Monitor is the product of a rule. You can create alert rules to create custom alerts and 
+          notifications. The following composition of an alert rule remian the same for all types of data types and for all resource types: 
+            
+            + RESOURCE: target resouce for the alert rule; can assign mutilple target resources to a single alert rule. 
+            + CONDITION: the signal type used to assess the rule: can be metrix, an activity log, or logs. 
+            + ACTIONS: the action, like sending an email, sending an SQS message or using a webhook; or an action group for a unique set of recipients for the action. 
+            + ALERT DETAILS: an alert name and description that specify the alert' purpose; also the severity value of the alert 
+    
+        - Using metric alerts
+            + metric alerts have another factor tod define which is the condition type:
+                - Static threshold metric alerts: based on simple static conditions to trigger that you define. 
+                - Dynamic threshold metric alerts: based on using machine learning tools to automatically improce the 
+                  accracy of the thresholds defiend by the initial rules. 
+                    + Dynamic threshols require definition of two more parameters: 
+                        - The look-back period which defines how many previous periods to be evaluated 
+                        - The number of violations which expresses how many times the logic condition has to deviate from 
+                          the expected behavior before the alert rules fires a notification
+        
+        - Using log alerts (on events in your application)
+            + Azure monitor captures important log information from log files, which cna be created by applications, OSs, other hardware, 
+              or Azure services. 
+            + the log alerts behave in a slightly different way from other alert mechanisms. It defines the following params: 
+                - Log query: log search rule 
+                - Time period: how often it should run
+                - Frequency: the time period under evaluation
+                - Threshold: the query to be run
+            + Number of Records
+                - this type of log search returns a single alert when the number of records in a search result reaches or exceeds the value 
+                  for th number of records. 
+            + Metric Measurement
+                - provides a more careful alert mechanisms with advanced cofiguraiton for varying level of tolerance defined. 
+                - metric measurement requires an additioanal criteria to be set:
+                    + Aggregate function: the calculation that will be make against the result
+                    + Group field: A field by which the reuslt will grouped
+                    + Interval: the time interval by which data is aggregated
+                    + Threshold: a point defined by an aggregated value and the total numebr of breaches
+                - Metric greatly reduce the volumn of alerts that are produced
+
+
+        - Using activity log alerts
+            + Azure log alerts allow you to be notified whne a specific event happens on some Azure resource
+            + Azure activity log can also include alerts for Azure service health
+            + there are two many types of acitivty log alerts:
+                - Specific operations: applied to resources within your Azure subscription, often has a scope  with specific resources or a resource group
+                - Service health events: include notice of incidents and maintainence of target resources
+
+            + similar to previous alerts, activity log alerts have their own attributes: 
+                - Category: Administrative, service health, autoscale, policy, or recommendation
+                - Scope: resource level, resource group level, or subscription level
+                - resource group: where the alert rule is saved
+                - resource type: namespace for the target of the alert 
+                - Operation name: operation name 
+                - level: verbase, informational, warning error or critical 
+                - status: started, failed, succeeded
+                - Event initialized by: email address or Azure Active Directory identifier (known as "caller") for the user
+
+        - Using action groups and alert processing rules 
+            - use action groups and alert processing rules to send notifications when an alert is fired
+            - when an alert is fired, Azure Monitor, Azure Service Health and Azure Advisor use action groups to notify users
+              about the alerts and take an action
+            - Azure Monitor can perform ane of the following actions: 
+                - send an email 
+                - send na SMS message
+                - create an Azure app push notificaition
+                - make voice call to a number
+                - trigger a logic app 
+                - send a notification to a webbook
+                - create an ITSM ticket 
+                - user a runbook (to restart a VM or scale a VM up or down)
+            - action groups can be reused with new alert rules 
+
+            - Alert processing rules
+                + alert processing rules are used to override the normal behavior of a fired alert by adding or suppressing an action group. Unlike alert rules, alert processing rules modify the alerts as they are being fired; specifically you can user these rules to:
+                    - suppress notifications during planned maintainence windows
+                    - implement management at scale by utlizing common use logic in a single rule instead of having to set it 
+                      consistently in all alert rules
+                    - add an action group to all alert types 
+
+
+
+Enable and Configure App Services application logging
+- What are app logs? 
+    + Azure provides built-in diagnotics with app logging. App logs are the runtime trace 
+      statements in app code (especially for logic checking or logged message when a particular 
+      level of error has occurred)
+    + App logging has scale limitation because files are being used t save the logged outputs. 
+      Therefore the same storage space is shared for multiple instances of an app. Due to sheer about 
+      of data produced by logging of multiple instances of an app, the file system is automatically reset 
+      after 12 hours from the first logging time. 
+    + Logging is different for different OS hosts. For example, Windows (with language stack of ASP.Net, ASP.net Core, Node.js) have the following log levels: Error, warning, information (STDOUT), warning, 
+    verbose. And Linux (with language stack of ASP.NET, Node.js, java) have only error log level. 
+
+- Alternative to app diagnotics
+    + Azure Insights is a site extension that provides additional performance monitoring features such 
+      as usage and performance data. 
+
+- View live application logging with the log streaming service 
+    + Live log streaming an easy and efficient way to view live logs for troubleshooting purposes, without the process og locating and opening these logs. 
+
+Retrieve Application logs 
+- Th Azure Infrastructure used to run Azure web apps in Windows is not the same as that for linux apps, and log files are not stored in the same locations.
+    - For Windows apps, file system logs files are stored in a virtual drive associated withe web app. This drive is addressible as "D:\Home" and includes log files folder; within this folder are one or more subfolders:
+        + Application 
+        + Detailed Errors 
+        - Http
+        - W3SVC
+
+    - With Linux apps, Azure tools support fewer logging options than for windows applications. Redirections to STDERR and STDOUT are managed through the underlying Docker container that runs the app, and these messages are stored in Docker log files. To see messages logged by underlying processes, such as Apache, you will need to open an SSH connection to the Docker container.
+
+    - All Azure web apps have an associated Source Control Management service site. This site runs the Kudu service which manages deployment and troubleshooting for Azure web apps including options for viewing and downloading log files. 

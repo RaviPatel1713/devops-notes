@@ -1,0 +1,10 @@
+Azure Pipelines 
+- Pipelines automatically build and test code projects. 
+- The main idea behind pipelines is continuous integration and continuous testing 
+  to build, test and deliver code to any destination. 
+
+
+YAML 
+- used for deploying CI/CD pipelines 
+- Feature availability 
+    

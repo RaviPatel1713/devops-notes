@@ -1,0 +1,10 @@
+Web server setup 
+- Scale up rules
+    + for conconcurrent users 
+- Scale out rules
+    + for more throughput and high customer traffic handling 
+
+Terraform
+- Every stage gas a provider.tf file for configuration the cloud porvider 
+    + in our case it is going to be azure shop entirely 
+- In order to create a storage 

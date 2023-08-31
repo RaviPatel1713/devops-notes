@@ -1,0 +1,14 @@
+What is App Configuraiton? 
+- Azure App Configuraiton is one of the solutions that provides a service to centrally manage application settings and feature flags. 
+  The overall idea is to store all the settings for your application in an secure their accesses in one place. In order to promote 
+  robust scaleability and availibility of cloud-based applicaitions, which have multiple VMs or containers in multiple regions and countless
+  external services.
+
+- While any application cna make use of App Configuraiton, the following examples are the types fo applications that benefit from the use 
+  of it: 
+    - Microservices base on Azure Kubernetes Service, Azure Service Fabric, or other containerized apps deployed from the use of it.
+    - Serverless app, which include Azure functions or other event driven stateless compute apps (like service queues, ML tools, etc)
+    - Continuous deployment pipelines
+
+
+    
